@@ -18,5 +18,8 @@ class Book(models.Model):
                                     null=True,
                                     blank=True)
 
+    def is_available(self):
+        return self.status == self.BookStatus.AVAILABLE
+
     def __str__(self):
         return self.name

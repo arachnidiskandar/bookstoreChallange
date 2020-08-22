@@ -3,6 +3,8 @@ from .models import Book
 
 
 class BookSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Book
-        fields = ['id', 'name', 'description', 'status', 'borrow_date', 'borrow_price']
+        fields = ['id', 'name', 'description', 'status', 'borrow_date', 'borrow_price', 'borrowed_to']
+

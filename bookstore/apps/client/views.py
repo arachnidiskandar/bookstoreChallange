@@ -4,18 +4,16 @@ from rest_framework import status
 from rest_framework.response import Response
 from .serializers import ClientSerializer
 from datetime import datetime
+from rest_framework.renderers import JSONRenderer
 import math
 
 
 class ClientBooks(APIView):
-    def get_object(self, id):
-        try:
-            return Client.objects.get(id=id)
-        except Client.ObjectDoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
     def get(self, request, id):
-        client = self.get_object(id)
+        try:
+            client = Client.objects.get(id=id)
+        except Exception as e:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ClientSerializer(client)
         for book in serializer.data['borrowed_books']:
             days_borrowed = (datetime.today() - datetime.strptime(book['borrow_date'], '%Y-%m-%d')).days
