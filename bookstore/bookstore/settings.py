@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'apps.book',
-    'apps.client'
+    'apps.client',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
