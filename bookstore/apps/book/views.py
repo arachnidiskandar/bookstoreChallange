@@ -9,7 +9,7 @@ from datetime import datetime
 from rest_framework.views import APIView
 
 
-class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin):
+class GetAllBooks(generics.GenericAPIView, mixins.ListModelMixin):
     serializer_class = BookSerializer
     queryset = Book.objects.all()
 

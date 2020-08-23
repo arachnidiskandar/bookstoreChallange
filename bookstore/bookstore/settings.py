@@ -104,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

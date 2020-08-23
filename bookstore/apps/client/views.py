@@ -9,6 +9,9 @@ import math
 
 
 class ClientBooks(APIView):
+    def get_delay_penalty_value(self, interest, days_late, borrow_price, fixed_percentage_value):
+        return (borrow_price * (fixed_percentage_value / 100)) + (borrow_price * pow((1 + interest / 100), days_late))
+
     def get(self, request, id):
         try:
             client = Client.objects.get(id=id)
@@ -21,10 +24,10 @@ class ClientBooks(APIView):
                 price = float(book['borrow_price'])
                 days_late = days_borrowed - 3
                 if days_late <= 3:
-                    penalty_value = (price * 0.03) + (price * pow(1.0002, days_late))
+                    penalty_value = (self.get_delay_penalty_value(0.2, days_late, price, 3) - price)
                 elif days_late <= 5:
-                    penalty_value = (price * 0.05) + (price * pow(1.0004, days_late))
+                    penalty_value = (self.get_delay_penalty_value(0.4, days_late, price, 5) - price)
                 else:
-                    penalty_value = (price * 0.07) + (price * pow(1.0006, days_late))
-                book['delay_penalty_value'] = math.trunc(penalty_value * 100) / 100
+                    penalty_value = (self.get_delay_penalty_value(0.6, days_late, price, 7) - price)
+                book['delay_penalty_value'] = (math.trunc(penalty_value * 100) / 100)
         return Response(serializer.data)
