@@ -38,8 +38,8 @@ python manage.py runserver
 7. Access it through http://127.0.0.1:8000/admin
 
 ## Endpoints
-http://127.0.0.1:8000/client/<id>/books/
+http://127.0.0.1:8000/client/id/books/
 
 http://127.0.0.1:8000/books/
 
-http://127.0.0.1:8000/books/<id>/reserve
+http://127.0.0.1:8000/books/id/reserve
